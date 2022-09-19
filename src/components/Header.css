@@ -13,6 +13,7 @@
   object-fit: contain;
   margin: 0 20px;
   margin-top: 18px;
+  margin-bottom: auto;
 }
 
 .header-search {
@@ -38,6 +39,8 @@
 .header-nav {
   display: flex;
   justify-content: space-evenly;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .header-option {

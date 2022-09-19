@@ -1,12 +1,17 @@
 import React from 'react';
+import { useAppSelector } from '../app/hooks';
+import { totalAmount } from '../features/basket/basketUtils';
 import './Subtotal.css';
 
 function Subtotal() {
   const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+  const basket = useAppSelector((state) => state.basket);
+
   return (
     <div className='subtotal'>
       <p>
-        Subtotal (0 items): <strong>{formatter.format(0)}</strong>
+        Subtotal ({basket.items.length} items):
+        <strong>{formatter.format(totalAmount(basket))}</strong>
       </p>
       <label className='subtotal-gift'>
         <input type='checkbox' />

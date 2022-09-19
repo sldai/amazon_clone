@@ -2,8 +2,13 @@ import React from 'react';
 import './Header.css';
 import { Search, ShoppingBasket } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { signOut } from '../features/auth/authSlice';
 
 function Header() {
+  const basket = useAppSelector((state) => state.basket);
+  const auth = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   return (
     <div className='header'>
       <Link to='/'>
@@ -15,10 +20,22 @@ function Header() {
       </div>
 
       <div className='header-nav'>
-        <div className='header-option'>
-          <span className='header-option-line-one'>Hello</span>
-          <span className='header-option-line-two'>Sign in</span>
-        </div>
+        {auth.user ? (
+          <div className='header-option' onClick={() => dispatch(signOut())} style={{ cursor: 'pointer' }}>
+            <span className='header-option-line-one'>
+              Hello {(auth.user as any).displayName || (auth.user as any).email}
+            </span>
+            <span className='header-option-line-two'>Sign out</span>
+          </div>
+        ) : (
+          <Link to='/login'>
+            <div className='header-option'>
+              <span className='header-option-line-one'>Hello</span>
+              <span className='header-option-line-two'>Sign in</span>
+            </div>
+          </Link>
+        )}
+
         <div className='header-option'>
           <span className='header-option-line-one'>Returns</span>
           <span className='header-option-line-two'>& Orders</span>
@@ -32,7 +49,7 @@ function Header() {
       <Link to='/checkout'>
         <div className='header-option-basket'>
           <ShoppingBasket />
-          <span className='header-option-line-two header-basket-count'>0</span>
+          <span className='header-option-line-two header-basket-count'>{basket.items.length}</span>
         </div>
       </Link>
     </div>
