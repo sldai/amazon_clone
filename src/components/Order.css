@@ -1,0 +1,14 @@
+.order {
+  padding: 20px;
+  margin: 0;
+  border: 1px solid lightgray;
+  background-color: white;
+}
+
+.order + .order {
+  margin-top: 20px;
+}
+.order-id {
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightgray;
+}

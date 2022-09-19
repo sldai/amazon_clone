@@ -29,6 +29,9 @@
   color: #111;
   cursor: pointer;
 }
+.product:hover {
+  box-shadow: 0 0 10px rgba(33,33,33,.2); 
+}
 
 .product-info {
   height: 100px;

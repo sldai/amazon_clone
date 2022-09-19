@@ -4,12 +4,11 @@ import {
   signInWithEmailAndPassword,
   signOut as fbSignOut,
   updateProfile,
-  User,
 } from 'firebase/auth';
 import { auth } from '../firebase';
 
 const initialState = {
-  user: null as object | null,
+  user: null as { id: string; name: string | null; email: string | null } | null,
   isLoading: false,
   errorMessage: '',
 };
@@ -28,10 +27,10 @@ export const signIn = createAsyncThunk(
   async ({ email, password }: { email: string; password: string }, thunkAPI) => {
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
-      return user.toJSON();
+      return { id: user.uid, email: user.email, name: user.displayName };
     } catch (error: any) {
       console.log(error);
-      thunkAPI.rejectWithValue(authError(error));
+      return thunkAPI.rejectWithValue(authError(error));
     }
   }
 );
@@ -42,10 +41,10 @@ export const register = createAsyncThunk(
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(user, { displayName: name });
-      return user.toJSON();
+      return { id: user.uid, email: user.email, name: user.displayName };
     } catch (error: any) {
       console.log(error);
-      thunkAPI.rejectWithValue(authError(error));
+      return thunkAPI.rejectWithValue(authError(error));
     }
   }
 );

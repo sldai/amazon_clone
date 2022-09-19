@@ -4,7 +4,7 @@ import { auth } from '../firebase';
 import { setUser } from './authSlice';
 
 const unsubscribe = onAuthStateChanged(auth, (user) => {
-  store.dispatch(setUser(user?.toJSON()));
+  store.dispatch(setUser(user && { id: user.uid, email: user.email, name: user.displayName }));
 });
 
 export default function setAutoLogin(flag: boolean) {

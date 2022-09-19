@@ -26,8 +26,11 @@ const basketSlice = createSlice({
       if (index >= 0) state.items.splice(index, 1);
       else console.warn(`Cant remove prodcut (id: ${action.payload.id}) as its not in basket!`);
     },
+    emptyBasket(state) {
+      state.items = [];
+    },
   },
 });
 
-export const { addToBasket, removeFromBasket } = basketSlice.actions;
+export const { addToBasket, removeFromBasket, emptyBasket } = basketSlice.actions;
 export default basketSlice.reducer;

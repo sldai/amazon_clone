@@ -33,7 +33,9 @@ function CheckoutProduct({ id, imageSrc, title, price, rating }: Props) {
               <span key={i}>⭐</span>
             ))}
         </div>
-        <button className='product-button' onClick={onClick}>Remove from Basket</button>
+        <button className='product-button' onClick={onClick}>
+          Remove from Basket
+        </button>
       </div>
     </div>
   );
