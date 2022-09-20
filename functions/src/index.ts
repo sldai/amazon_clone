@@ -10,7 +10,7 @@ const stripe = new Stripe(process.env.STRIPE_KEY!, {
 });
 
 const app = express();
-app.use(cors({ origin: true }));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

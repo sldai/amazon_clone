@@ -28,8 +28,7 @@ function Payment() {
   useEffect(() => {
     const getClientSecret = async () => {
       const response = await axios.post(
-        'http://127.0.0.1:5001/something-special-dddf8/us-central1/api' +
-          `/payments/create?total=${totalAmount({ items }) * 100}`
+        process.env.REACT_APP_FUNCTIONS_URL + `/payments/create?total=${totalAmount({ items }) * 100}`, 
       );
       setClientSecret(response.data.clientSecret);
     };
